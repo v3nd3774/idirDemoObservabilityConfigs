@@ -8,6 +8,50 @@
 
 ### Installation on server
 
+#### Prometheus
+
+##### Purpose
+
+This is the time series database that will store telemetry data for the systems we want to monitor.
+Additionally, it can generate alerts based on customized queries for this data.
+These alerts will be sent to ZenDuty through an integration to generate an SMS alert as needed.
+
+##### Steps
+
+1. Download prometheus install file from pre-compiled binaries with (may need to update version strings):
+```
+$ wget https://github.com/prometheus/prometheus/releases/download/v2.49.1/prometheus-2.49.1.linux-amd64.tar.gz
+$ mkdir prometheus
+$ tar -C prometheus -xvzf prometheus-2.49.1.linux-amd64.tar.gz
+```
+2. Move the prometheus installation to the desired location with:
+
+```
+$mv prometheus/prometheus-2.49.1 <desired location here>
+```
+3. Create the folders for prometheus to store data with:
+```
+$sudo mkdir /var/lib/prometheus/data
+```
+4. Create a `prometheus` linux user and group on the system to run the prometheus instance.
+
+5. Copy the template for the prometheus service from this repo to `/etc/systemd/system/prometheus.service` with:
+```
+# From this repo for pwd:
+$sudo cp prometheus/prometheus.service.template /etc/systemd/system/prometheus.service
+```
+6. Fill in the required data in the service file template with `vim /etc/systemd/system/prometheus.service`
+
+7. Fill in the required data in the configuration template with `vim <path to repo>/prometheus/prometheus.yml.template`
+
+8. Copy the template file to the appropriate location with `$cp <path to repo>/prometheus/prometheus.{yml.template, yml}`
+
+9. Reload the daemon that manages services with: `$ sudo systemctl daemon-reload`
+
+10. Start the prometheus service with: `$ sudo systemctl start prometheus`
+
+11. Confirm the prometheus service is working with: `$ sudo systemctl status prometheus`
+
 #### OpenTelemetry Collector
 
 ##### Purpose
@@ -51,3 +95,7 @@ $
 $ sudo systemctl restart otelcol
 $ sudo journalctl -u otelcol
 ```
+#### Resources
+
+- [Install the Collector](https://opentelemetry.io/docs/collector/installation/)
+- [A practical guide to data collection with OpenTelemetry and Prometheus](https://grafana.com/blog/2023/07/20/a-practical-guide-to-data-collection-with-opentelem-and-prometheus/)
