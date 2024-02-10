@@ -31,6 +31,8 @@ processors:
 exporters:
   debug:
     verbosity: detailed
+  prometheusremotewrite:
+    endpoint: "https://localhost:7900/api/v1/push"
 
 service:
 

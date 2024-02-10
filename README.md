@@ -104,3 +104,4 @@ $ sudo journalctl -u otelcol
 - [A practical guide to data collection with OpenTelemetry and Prometheus](https://grafana.com/blog/2023/07/20/a-practical-guide-to-data-collection-with-opentelem-and-prometheus/)
 - [How to Run Prometheus server as a Service?](https://www.devopsschool.com/blog/how-to-run-prometheus-server-as-a-service/)
 - [Python app instrumentation](https://opentelemetry.io/docs/languages/python/getting-started/)
+- [Otel prometheus remote writer]()
