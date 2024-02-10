@@ -77,7 +77,7 @@ Redirecting to /bin/systemctl status otelcol.service
       Tasks: 22 (limit: 154460)
      Memory: 21.0M
      CGroup: /system.slice/otelcol.service
-             ÀÄ3260254 /usr/bin/otelcol --config=/etc/otelcol/config.yaml
+             Ã€Ã„3260254 /usr/bin/otelcol --config=/etc/otelcol/config.yaml
 
 Feb 09 16:00:45 idir-server12 otelcol[3260254]: Descriptor:
 Feb 09 16:00:45 idir-server12 otelcol[3260254]:      -> Name: up
@@ -104,4 +104,4 @@ $ sudo journalctl -u otelcol
 - [A practical guide to data collection with OpenTelemetry and Prometheus](https://grafana.com/blog/2023/07/20/a-practical-guide-to-data-collection-with-opentelem-and-prometheus/)
 - [How to Run Prometheus server as a Service?](https://www.devopsschool.com/blog/how-to-run-prometheus-server-as-a-service/)
 - [Python app instrumentation](https://opentelemetry.io/docs/languages/python/getting-started/)
-- [Otel prometheus remote writer]()
+- [Otel prometheus remote writer](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/prometheusremotewriteexporter/README.md#getting-started)
