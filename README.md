@@ -65,19 +65,19 @@ It will push this data to Prometheus.
 ##### Steps
 
 Also, it will
-1. Follow installation instructions for collector [here](https://opentelemetry.io/docs/collector/installation/\#linux).
+1. Follow installation instructions for collector [here](https://opentelemetry.io/docs/collector/installation/\#linux). However, be sure to install the `otelcol-contrib` package which includes community additions.
 2. Verify installation was successful with :
 ```
-$ service otelcol status
-Redirecting to /bin/systemctl status otelcol.service
+$ service otelcol-contrib status
+Redirecting to /bin/systemctl status otelcol-contrib.service
 ? otelcol.service - OpenTelemetry Collector
-     Loaded: loaded (/usr/lib/systemd/system/otelcol.service; enabled; vendor preset: disabled)
+     Loaded: loaded (/usr/lib/systemd/system/otelcol-contrib.service; enabled; vendor preset: disabled)
      Active: active (running) since Fri 2024-02-09 15:55:59 CST; 4min 47s ago
-   Main PID: 3260254 (otelcol)
+   Main PID: 3260254 (otelcol-contrib)
       Tasks: 22 (limit: 154460)
      Memory: 21.0M
-     CGroup: /system.slice/otelcol.service
-             ÀÄ3260254 /usr/bin/otelcol --config=/etc/otelcol/config.yaml
+     CGroup: /system.slice/otelcol-contrib.service
+             ÀÄ3260254 /usr/bin/otelcol-contrig --config=/etc/otelcol/config.yaml
 
 Feb 09 16:00:45 idir-server12 otelcol[3260254]: Descriptor:
 Feb 09 16:00:45 idir-server12 otelcol[3260254]:      -> Name: up
@@ -93,6 +93,7 @@ $
 ```
 3. Clone this repo onto the server.
 4. Follow instructions for [Automatic service configuration](https://opentelemetry.io/docs/collector/installation/#automatic-service-configuration) and point to the `config.yaml` file in the `otel` folder of this repo.
+The file must be modified with the following command since the `otelcol-contrib` package is used: `vi /etc/otelcol-contrib/otelcol-contrib.conf`
 5. Confirm the service is operating as expected with:
 ```
 $ sudo systemctl restart otelcol
@@ -123,6 +124,8 @@ http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}/http_ser
 Average time for a request over time.
 Shows spikes, but slowly decreases based on number of requests.
 
+</hr>
+
 ![graph](./img/bipartiteGraphApiPrometheusRate5mIntervalNoCount.png)
 ```
 rate(http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}[5m])
@@ -131,9 +134,20 @@ Calculate the 5min averaged rate over a 1hr period of the http server request du
 Shows spikes in http request duration.
 Difficult to increase fast enough to reflect latency buildup of disabling cache.
 
+</hr>
+
 ![graph](./img/bipartiteGraphApiPrometheusRate5mInterval.png)
 ```
 avg_over_time(http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}[5m])/avg_over_time(http_server_duration_milliseconds_count{exported_job="bipartiteGraphApi"}[5m])
 ```
 Calculate the average time for an http request to complete within 5m sliding interval windows over time.
 Shows average request time and trends.
+
+</hr>
+
+![graph](./img/bipartiteGraphUiAndApiHealthcheck.png)
+```
+httpcheck_duration_milliseconds{http_url="https://idir.uta.edu/bipartiteGraphUi"} or httpcheck_duration_milliseconds{http_url="https://idir.uta.edu/bipartiteGraphApi/environ"}
+```
+Display http healthcheck duration over time for UI and API components on initial load of webpage.
+Does NOT include information for custom queries made with the UI.
