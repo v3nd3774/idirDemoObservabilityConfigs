@@ -11,7 +11,8 @@ Type=simple
 ExecStart=<absolute path to prometheus install location here>/prometheus \
     --config.file <absolute path to this repo>/prometheus/prometheus.yml \
     --storage.tsdb.path /var/lib/prometheus/ \
-    --enable-feature=remote-write-receiver
+    --web.enable-remote-write-receiver \
+    --enable-feature=otlp-write-receiver
 
 [Install]
 WantedBy=multi-user.target

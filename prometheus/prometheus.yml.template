@@ -1,4 +1,12 @@
 rule_files:
   - "<path to this repo here>/prometheus/rules/*.yml"
-tsdb:
-  out_of_order_time_window: 10m
+storage:
+  tsdb:
+    out_of_order_time_window: 10m
+scrape_configs:
+  -job_name: otel_collector
+  honor_timestamps: true
+  static_configs:
+    - targets: ["0.0.0.0:1234"]
+      labels:
+        server: idirserver12
