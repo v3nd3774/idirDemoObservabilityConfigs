@@ -1,3 +1,2 @@
-global:
-  rule_files:
-    - <path to this repo here>/prometheus/rules/*.yml
+rule_files:
+  - "<path to this repo here>/prometheus/rules/*.yml"
