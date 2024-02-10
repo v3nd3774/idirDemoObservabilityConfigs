@@ -29,28 +29,31 @@ $ tar -C prometheus -xvzf prometheus-2.49.1.linux-amd64.tar.gz
 ```
 $mv prometheus/prometheus-2.49.1 <desired location here>
 ```
-3. Create the folders for prometheus to store data with:
+3. Create a `prometheus` linux user and group on the system to run the prometheus instance.
+
+4. Create the folder for prometheus to store data with:
 ```
 $sudo mkdir /var/lib/prometheus/data
+$sudo chown -R prometheus:prometheus /var/lib/prometheus
 ```
-4. Create a `prometheus` linux user and group on the system to run the prometheus instance.
-
 5. Copy the template for the prometheus service from this repo to `/etc/systemd/system/prometheus.service` with:
 ```
 # From this repo for pwd:
 $sudo cp prometheus/prometheus.service.template /etc/systemd/system/prometheus.service
 ```
-6. Fill in the required data in the service file template with `vim /etc/systemd/system/prometheus.service`
+6. Fill in the required data in the service file template with `sudo vim /etc/systemd/system/prometheus.service`
 
-7. Fill in the required data in the configuration template with `vim <path to repo>/prometheus/prometheus.yml.template`
+7. Copy the template file to the appropriate location with `$cp <path to repo>/prometheus/prometheus.{yml.template, yml}`
 
-8. Copy the template file to the appropriate location with `$cp <path to repo>/prometheus/prometheus.{yml.template, yml}`
+8. Fill in the required data in the configuration template with `vim <path to repo>/prometheus/prometheus.yml`
 
 9. Reload the daemon that manages services with: `$ sudo systemctl daemon-reload`
 
-10. Start the prometheus service with: `$ sudo systemctl start prometheus`
+10. Make SELinux changes to filetype of binary so `systemd` can execute it with: `$chcon -t bin_t <path to prometheus install>/prometheus`
 
-11. Confirm the prometheus service is working with: `$ sudo systemctl status prometheus`
+11. Start the prometheus service with: `$ sudo systemctl start prometheus`
+
+12. Confirm the prometheus service is working with: `$ sudo systemctl status prometheus`
 
 #### OpenTelemetry Collector
 
@@ -99,3 +102,4 @@ $ sudo journalctl -u otelcol
 
 - [Install the Collector](https://opentelemetry.io/docs/collector/installation/)
 - [A practical guide to data collection with OpenTelemetry and Prometheus](https://grafana.com/blog/2023/07/20/a-practical-guide-to-data-collection-with-opentelem-and-prometheus/)
+- [How to Run Prometheus server as a Service?](https://www.devopsschool.com/blog/how-to-run-prometheus-server-as-a-service/)
