@@ -1,0 +1,8 @@
+selenium==4.17.2
+ruff==0.2.1
+mypy==1.8.0
+jedi==0.19.1
+jedi-language-server==0.41.2
+pylint==3.0.3
+opentelemetry-distro==0.43b0
+opentelemetry-exporter-otlp==1.22.0

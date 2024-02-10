@@ -99,6 +99,40 @@ The file must be modified with the following command since the `otelcol-contrib`
 $ sudo systemctl restart otelcol
 $ sudo journalctl -u otelcol
 ```
+#### Selenium
+
+##### Purpose
+
+This is the engine that will open a web-browser and interact with systems being monitored,
+the interaction data will be sent to the OpenTelemetry Collector.
+
+##### Steps
+
+1. Download the Google Chrome `rpm` package with: `wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm`
+2. Install Google Chrome with: `sudo yum install ./google-chrome-stable_current_*.rpm`
+3. Confirm Google Chrome is installed with:
+```
+$ google-chrome
+[3865202:3865202:0210/142420.413294:ERROR:ozone_platform_x11.cc(239)] Missing X server or $DISPLAY
+[3865202:3865202:0210/142420.413354:ERROR:env.cc(257)] The platform failed to initialize.  Exiting.
+```
+4. Locate the URL to use for the `chromedriver` that matches the system from [here](https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json)
+5. Download the `chromedriver` with: `wget <url here>`
+6. Unzip the file &amp; `cd` to the unzipped folder
+7. Move the file and configure it to be on `$PATH` with:
+```
+$ sudo mv chromedriver /usr/bin/chromedriver
+$ sudo chown root:root /usr/bin/chromedriver
+$ sudo chmod +x /usr/bin/chromedriver
+```
+8. Create &amp; activate `virtualenv` to use `python` bindings for Selenium
+9. Install Selenium bindings for `python` in `virtualenv` with: `pip install -r selenium/requirements.txt`
+10. Download latest `selenium-server.jar` file with `wget` from [here](https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.17.0),
+then move the file where it should be installed.
+11. Copy the `selenium/selenium-server.service` file from this repo to `/etc/systemd/system/selenium-server.service`
+12. Customize the file to point to the install location from step 10.
+
+
 #### Resources
 
 - [Install the Collector](https://opentelemetry.io/docs/collector/installation/)
