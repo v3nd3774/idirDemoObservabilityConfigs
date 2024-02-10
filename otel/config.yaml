@@ -32,7 +32,7 @@ exporters:
   debug:
     verbosity: detailed
   prometheusremotewrite:
-    endpoint: "https://localhost:7900/api/v1/push"
+    endpoint: "https://localhost:9090/api/v1/push"
 
 service:
 
