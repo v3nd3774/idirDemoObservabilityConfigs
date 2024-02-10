@@ -105,3 +105,35 @@ $ sudo journalctl -u otelcol
 - [How to Run Prometheus server as a Service?](https://www.devopsschool.com/blog/how-to-run-prometheus-server-as-a-service/)
 - [Python app instrumentation](https://opentelemetry.io/docs/languages/python/getting-started/)
 - [Otel prometheus remote writer](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/prometheusremotewriteexporter/README.md#getting-started)
+- [Otel prometheus exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/prometheusremotewriteexporter/README.md#getting-started)
+- [Querying examples](https://prometheus.io/docs/prometheus/latest/querying/examples/)
+- [promlabs query examples](https://promlabs.com/promql-cheat-sheet/)
+
+#### Queries
+
+To run the queries, open an ssh tunnel to port-forward prometheus to `localhost:9090`, then visit `http://localhost:9090`
+in a browser to view the following queries.
+
+##### `bipartiteGraphApi`
+
+![graph](./img/bipartiteGraphApiPrometheusRate.png)
+```
+http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}/http_server_duration_milliseconds_count{exported_job="bipartiteGraphApi"}
+```
+Average time for a request over time.
+Shows spikes, but slowly decreases based on number of requests.
+
+![graph](./img/bipartiteGraphApiPrometheusRate5mIntervalNoCount.png)
+```
+rate(http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}[5m])
+```
+Calculate the 5min averaged rate over a 1hr period of the http server request duration.
+Shows spikes in http request duration.
+Difficult to increase fast enough to reflect latency buildup of disabling cache.
+
+![graph](./img/bipartiteGraphApiPrometheusRate5mInterval.png)
+```
+avg_over_time(http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}[5m])/avg_over_time(http_server_duration_milliseconds_count{exported_job="bipartiteGraphApi"}[5m])
+```
+Calculate the average time for an http request to complete within 5m sliding interval windows over time.
+Shows average request time and trends.
