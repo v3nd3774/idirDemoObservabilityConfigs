@@ -124,7 +124,7 @@ http_server_duration_milliseconds_sum{exported_job="bipartiteGraphApi"}/http_ser
 Average time for a request over time.
 Shows spikes, but slowly decreases based on number of requests.
 
-</hr>
+---
 
 ![graph](./img/bipartiteGraphApiPrometheusRate5mIntervalNoCount.png)
 ```
@@ -134,7 +134,7 @@ Calculate the 5min averaged rate over a 1hr period of the http server request du
 Shows spikes in http request duration.
 Difficult to increase fast enough to reflect latency buildup of disabling cache.
 
-</hr>
+---
 
 ![graph](./img/bipartiteGraphApiPrometheusRate5mInterval.png)
 ```
@@ -143,7 +143,7 @@ avg_over_time(http_server_duration_milliseconds_sum{exported_job="bipartiteGraph
 Calculate the average time for an http request to complete within 5m sliding interval windows over time.
 Shows average request time and trends.
 
-</hr>
+---
 
 ![graph](./img/bipartiteGraphUiAndApiHealthcheck.png)
 ```
