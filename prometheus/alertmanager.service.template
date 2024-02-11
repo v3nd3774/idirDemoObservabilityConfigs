@@ -9,7 +9,8 @@ User=prometheus
 Group=prometheus
 Type=simple
 ExecStart=<absolute path to alertmanager install location here>/alertmanager \
-    --config.file <absolute path to this repo>/prometheus/alertmanager.yml
+    --config.file <absolute path to this repo>/prometheus/alertmanager.yml \
+    --storage.path /var/lib/alertmanager/data/
 
 [Install]
 WantedBy=multi-user.target

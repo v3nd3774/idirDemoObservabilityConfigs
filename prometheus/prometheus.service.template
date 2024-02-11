@@ -10,7 +10,7 @@ Group=prometheus
 Type=simple
 ExecStart=<absolute path to prometheus install location here>/prometheus \
     --config.file <absolute path to this repo>/prometheus/prometheus.yml \
-    --storage.tsdb.path /var/lib/prometheus/ \
+    --storage.tsdb.path /var/lib/prometheus/data/ \
     --web.enable-remote-write-receiver \
     --enable-feature=otlp-write-receiver
 

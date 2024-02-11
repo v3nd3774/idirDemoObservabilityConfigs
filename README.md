@@ -33,7 +33,7 @@ $mv prometheus/prometheus-2.49.1 <desired location here>
 
 4. Create the folder for prometheus to store data with:
 ```
-$sudo mkdir /var/lib/prometheus/data
+$sudo mkdir -p /var/lib/prometheus/data
 $sudo chown -R prometheus:prometheus /var/lib/prometheus
 ```
 5. Copy the template for the prometheus service from this repo to `/etc/systemd/system/prometheus.service` with:
@@ -155,9 +155,14 @@ I can become aware and investigate the issue.
 6. Copy the `prometheus/alertmanager.yml.template` file to `prometheus/alertmanager.yml`
 7. Customize the config file as needed
 8. Make SELinux changes to filetype of binary so `systemd` can execute it with: `$chcon -t bin_t <path to alertmanager install>/alertmanager`
-9. Reload the daemon that manages services with: `$ sudo systemctl daemon-reload`
-10. Start the alertmanager service with: `$ sudo systemctl start alertmanager`
-11. Confirm the alertmanager service is working with: `$ sudo systemctl status alertmanager`
+9. Create data storage path and add permissions with:
+```
+$sudo mkdir -p /var/lib/alertmanager/data
+$sudo chown -R prometheus:prometheus /var/lib/alertmanager
+```
+10. Reload the daemon that manages services with: `$ sudo systemctl daemon-reload`
+11. Start the alertmanager service with: `$ sudo systemctl start alertmanager`
+12. Confirm the alertmanager service is working with: `$ sudo systemctl status alertmanager`
 
 #### Resources
 
