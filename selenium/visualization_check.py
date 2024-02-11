@@ -56,7 +56,7 @@ driver.get("https://idir.uta.edu/bipartiteGraphUi/")
 driver.implicitly_wait(1)
 RETRIES: int = 15
 SLEEP_TIME: int = 10
-bipartite_graph_svg: Union[WebElement, None] = None
+bipartite_graph_svg: "WebElement | None" = None
 while RETRIES >= 0:
     try:
         bipartite_graph_svg = driver.find_element(
