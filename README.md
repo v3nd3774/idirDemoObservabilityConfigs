@@ -4,7 +4,16 @@
 
 #### Architecture
 
+![Architecture](./img/arch.drawio.png)
+
+Overview of the architecture is shown above.
+This will ensure alerts are generated on laggy graph loads.
+It will also cause the daily snapshot for a landing page query
+to be available in the cache, speeding up initial page loads.
+
 #### How do I get started?
+
+Install the components and configure as explained below:
 
 ### Installation on server
 
