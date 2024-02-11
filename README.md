@@ -194,3 +194,16 @@ httpcheck_duration_milliseconds{http_url="https://idir.uta.edu/bipartiteGraphUi"
 ```
 Display http healthcheck duration over time for UI and API components on initial load of webpage.
 Does NOT include information for custom queries made with the UI.
+
+---
+
+![graph](./img/bipartiteGraphUiSynthetic.png)
+```
+bipartitegraphuiseleniumsvgtestduration_S_total
+```
+Display synthetic traffic duration over time for UI testing.
+Currently the test is simple, the webapp is visited and the
+browser driver will wait for the `svg` containing the rendering
+of the bipartite graph to appear. Once this is detected
+on the webpage the test ends and the duration is sent through
+OTEL Collector to Prometheus for graphing and alerting.
