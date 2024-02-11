@@ -10,3 +10,7 @@ scrape_configs:
       - targets: ["0.0.0.0:1234"]
         labels:
           server: idirserver12
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets: ["localhost:9093"]
