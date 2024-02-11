@@ -222,7 +222,8 @@ httpcheck_duration_milliseconds{http_url="https://idir.uta.edu/bipartiteGraphUi"
 Display http healthcheck duration over time for UI and API components on initial load of webpage.
 Does NOT include information for custom queries made with the UI.
 
----
+
+##### `bipartiteGraphUi`
 
 ![graph](./img/bipartiteGraphUiSynthetic.png)
 ```
@@ -234,3 +235,33 @@ browser driver will wait for the `svg` containing the rendering
 of the bipartite graph to appear. Once this is detected
 on the webpage the test ends and the duration is sent through
 OTEL Collector to Prometheus for graphing and alerting.
+
+#### Alerts
+
+##### `bipartiteGraphUi`
+
+Alerts implemented in these configs are listed and explained below:
+
+---
+
+![alert threshold](./img/bipartiteGraphUiAlertFiringGraphView.png)
+
+The prometheus server will begin registering a problem after the UI takes more than 30
+seconds to load the graph view. This is shown in the graph above.
+
+The alert panel in prometheus will light up as shown below:
+
+![alert panel](./img/bipartiteGraphUiAlertFiring.png)
+
+After a brief propagation delay, the alert will be sent to the alertmanager.
+
+After some further propagation delay, the alertmanager will send the alert to
+ZenDuty, this will text support team and increase awareness of load delay issues.
+
+Screenshots of the alert from the SMS message to the webpage view are below:
+
+![alert sms](./img/zendutySms.jpg)
+
+![alert webapp](./img/zendutyAlert.png)
+
+---
