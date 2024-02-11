@@ -1,0 +1,8 @@
+groups:
+- name: bipartite_graph_ui_svg_load_delay
+  rules:
+      - alert: BipartiteGraphUiSvgLoadDelay
+        expr: bipartitegraphuiseleniumsvgtestduration_S_total > 30
+        annotations:
+          summary: "Time for Bipartite Graph to load on UI landing page exceeded 30s from {{ $labels.server }}"
+          description: "The time for the Graph to load is currently: {{ $value }}s"

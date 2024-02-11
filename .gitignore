@@ -1,4 +1,6 @@
 prometheus/prometheus.yml
+prometheus/alertmanager.yml
+selenium/crontab-script.sh
 .python-version
 # Created by https://www.toptal.com/developers/gitignore/api/node,git,vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,git,vim
@@ -181,4 +183,3 @@ tags
 
 # End of https://www.toptal.com/developers/gitignore/api/node,git,vim
 .python-version
-selenium/crontab-script.sh

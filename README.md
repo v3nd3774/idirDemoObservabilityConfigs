@@ -137,6 +137,28 @@ then move the file where it should be installed.
 15. Customize the `selenium/crontab-script.sh` file as needed and use `chmod +x` to make it executable.
 16. Register the file with expression `* * * * *` to register the synthetic traffic to occur every minute.
 
+#### Prometheus Alertmanager
+
+##### Purpose
+
+This component will recieve configured alerts from Prometheus and forward them to zenduty.
+This will result in SMS alerts to notify me that the webapp performance is degraded so
+I can become aware and investigate the issue.
+
+##### Steps
+
+1. Download the alertmanager package from [here](https://prometheus.io/download/) with `wget` on the server.
+2. Untar the file
+3. Move alertmanager to the dedicated install location it will be in
+4. Copy the `prometheus/alertmanager.service.template` file to `/etc/systemd/system/alertmanager.service`
+5. Customize the service file as needed
+6. Copy the `prometheus/alertmanager.yml.template` file to `prometheus/alertmanager.yml`
+7. Customize the config file as needed
+8. Make SELinux changes to filetype of binary so `systemd` can execute it with: `$chcon -t bin_t <path to alertmanager install>/alertmanager`
+9. Reload the daemon that manages services with: `$ sudo systemctl daemon-reload`
+10. Start the alertmanager service with: `$ sudo systemctl start alertmanager`
+11. Confirm the alertmanager service is working with: `$ sudo systemctl status alertmanager`
+
 #### Resources
 
 - [Install the Collector](https://opentelemetry.io/docs/collector/installation/)
@@ -151,7 +173,7 @@ then move the file where it should be installed.
 - [How to run headless Chrome with Selenium in Python?](https://stackoverflow.com/a/53657649)
 - [Configuring and customising drivers](https://www.selenium.dev/documentation/grid/configuration/toml_options/#configuring-and-customising-drivers)
 - [Getting Started](https://www.selenium.dev/documentation/webdriver/getting_started/)
-
+- [Prometheus Integration Guide](https://zenduty.com/docs/prometheus-integration/)
 
 #### Queries
 
