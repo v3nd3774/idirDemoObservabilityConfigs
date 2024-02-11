@@ -65,7 +65,8 @@ while RETRIES >= 0:
         )
     except NoSuchElementException:
         pass
-    if bipartite_graph_svg and bipartite_graph_svg.is_displayed():
+    # Checks for presence as well as content
+    if bipartite_graph_svg and len(bipartite_graph_svg.text) > 0 and bipartite_graph_svg.is_displayed():
         break
     RETRIES = RETRIES - 1
     sleep(SLEEP_TIME)
