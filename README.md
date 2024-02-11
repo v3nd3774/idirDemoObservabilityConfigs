@@ -244,6 +244,11 @@ Alerts implemented in these configs are listed and explained below:
 
 ---
 
+##### SVG Load time exceeded 30 seconds
+
+This alert is triggered when the load time for the SVG containing the bipartite graph
+illustration takes more than 30s to render.
+
 ![alert threshold](./img/bipartiteGraphUiAlertFiringGraphView.png)
 
 The prometheus server will begin registering a problem after the UI takes more than 30
