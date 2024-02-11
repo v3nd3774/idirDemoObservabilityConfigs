@@ -17,6 +17,7 @@ from selenium import webdriver
 from selenium.webdriver import ChromeOptions, Remote
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 
 # Setup OTEL Collector Connection
@@ -55,11 +56,15 @@ driver.get("https://idir.uta.edu/bipartiteGraphUi/")
 driver.implicitly_wait(1)
 RETRIES: int = 15
 SLEEP_TIME: int = 10
+bipartite_graph_svg: WebElement | None = None
 while RETRIES >= 0:
-    bipartite_graph_svg: WebElement = driver.find_element(
-        by=By.CSS_SELECTOR,
-        value="container > svg"
-    )
+    try:
+        bipartite_graph_svg = driver.find_element(
+            by=By.CSS_SELECTOR,
+            value="container > svg"
+        )
+    except NoSuchElementException:
+        pass
     if bipartite_graph_svg and bipartite_graph_svg.is_displayed():
         break
     RETRIES = RETRIES - 1

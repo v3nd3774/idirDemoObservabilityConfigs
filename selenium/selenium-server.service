@@ -12,7 +12,8 @@ ExecStart= <path to java binary for use with this jar must be at least java 11> 
         <path to selenium server jar file downloaded and moved earlier> \
         standalone \
         --selenium-manager true \
-        --tracing true
+        --tracing true \
+        --config <path to repo here>/selenium/config.toml
 
 [Install]
 WantedBy=multi-user.target

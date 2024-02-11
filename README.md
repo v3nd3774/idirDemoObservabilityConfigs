@@ -108,30 +108,34 @@ the interaction data will be sent to the OpenTelemetry Collector.
 
 ##### Steps
 
-1. Download the Google Chrome `rpm` package with: `wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm`
-2. Install Google Chrome with: `sudo yum install ./google-chrome-stable_current_*.rpm`
-3. Confirm Google Chrome is installed with:
+1. Download the Google Chrome `zip` package with: `wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/121.0.6167.85/linux64/chrome-linux64.zip`
+&amp; unzip the file.
+2. Move the Google Chrome folder containing the executable `chrome` binary to the `/usr/lib` folder.
+3. Add symbolic link to `/usr/bin` for the `chrome executable` that was just moved.
+4. Confirm Google Chrome is installed with:
 ```
-$ google-chrome
+$ chrome
 [3865202:3865202:0210/142420.413294:ERROR:ozone_platform_x11.cc(239)] Missing X server or $DISPLAY
 [3865202:3865202:0210/142420.413354:ERROR:env.cc(257)] The platform failed to initialize.  Exiting.
 ```
-4. Locate the URL to use for the `chromedriver` that matches the system from [here](https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json)
-5. Download the `chromedriver` with: `wget <url here>`
-6. Unzip the file &amp; `cd` to the unzipped folder
-7. Move the file and configure it to be on `$PATH` with:
+5. Locate the URL to use for the `chromedriver` that matches the system and chrome version being used from [here](https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json)
+6. Download the `chromedriver` with: `wget <url here>`
+7. Unzip the file &amp; `cd` to the unzipped folder
+8. Move the file and configure it to be on `$PATH` with:
 ```
 $ sudo mv chromedriver /usr/bin/chromedriver
 $ sudo chown root:root /usr/bin/chromedriver
 $ sudo chmod +x /usr/bin/chromedriver
 ```
-8. Create &amp; activate `virtualenv` to use `python` bindings for Selenium
-9. Install Selenium bindings for `python` in `virtualenv` with: `pip install -r selenium/requirements.txt`
-10. Download latest `selenium-server.jar` file with `wget` from [here](https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.17.0),
+9. Create &amp; activate `virtualenv` to use `python` bindings for Selenium
+10. Install Selenium bindings for `python` in `virtualenv` with: `pip install -r selenium/requirements.txt`
+11. Download latest `selenium-server.jar` file with `wget` from [here](https://github.com/SeleniumHQ/selenium/releases/tag/selenium-4.17.0),
 then move the file where it should be installed.
-11. Copy the `selenium/selenium-server.service` file from this repo to `/etc/systemd/system/selenium-server.service`
-12. Customize the file to point to the install location from step 10.
-
+12. Copy the `selenium/selenium-server.service` file from this repo to `/etc/systemd/system/selenium-server.service`
+13. Customize the file as indicated in the file
+14. Copy the `selenium/crontab-script.sh.template` file to `selenium/crontab-script.sh`
+15. Customize the `selenium/crontab-script.sh` file as needed
+16. Register the file with expression `* * * * *` to register the synthetic traffic to occur every minute.
 
 #### Resources
 
@@ -143,6 +147,11 @@ then move the file where it should be installed.
 - [Otel prometheus exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/prometheusremotewriteexporter/README.md#getting-started)
 - [Querying examples](https://prometheus.io/docs/prometheus/latest/querying/examples/)
 - [promlabs query examples](https://promlabs.com/promql-cheat-sheet/)
+- [Capabilities &amp; ChromeOptions](https://chromedriver.chromium.org/capabilities)
+- [How to run headless Chrome with Selenium in Python?](https://stackoverflow.com/a/53657649)
+- [Configuring and customising drivers](https://www.selenium.dev/documentation/grid/configuration/toml_options/#configuring-and-customising-drivers)
+- [Getting Started](https://www.selenium.dev/documentation/webdriver/getting_started/)
+
 
 #### Queries
 

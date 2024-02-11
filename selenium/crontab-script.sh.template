@@ -1,0 +1,6 @@
+#/usr/bin/bash
+# Activate python virtual env and run selenium test
+source <customize to virtualEnv path>/bin/activate
+SCRIPT=$(realpath "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+python "$SCRIPTPATH/visualization_check.py"

@@ -1,0 +1,6 @@
+[node]
+detect-drivers = false
+[[node.driver-configuration]]
+display-name = "Chrome Dev"
+stereotype = "{\"browserName\": \"chrome\", \"browserVersion\": \"95\", \"platformName\": \"Linux\", \"goog:chromeOptions\": {\"binary\": \"/usr/bin/chrome\", \"args\": [\"--headless\"]}}"
+webdriver-executable = '/usr/bin/chromedriver'
