@@ -134,7 +134,7 @@ then move the file where it should be installed.
 12. Copy the `selenium/selenium-server.service` file from this repo to `/etc/systemd/system/selenium-server.service`
 13. Customize the file as indicated in the file
 14. Copy the `selenium/crontab-script.sh.template` file to `selenium/crontab-script.sh`
-15. Customize the `selenium/crontab-script.sh` file as needed
+15. Customize the `selenium/crontab-script.sh` file as needed and use `chmod +x` to make it executable.
 16. Register the file with expression `* * * * *` to register the synthetic traffic to occur every minute.
 
 #### Resources
