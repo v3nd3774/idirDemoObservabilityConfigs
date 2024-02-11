@@ -79,4 +79,5 @@ duration_metric.add(
 )
 for metric_reader in metric_readers:
     metric_reader.force_flush()
+driver.close()
 driver.quit()
