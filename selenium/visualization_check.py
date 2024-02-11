@@ -61,7 +61,7 @@ while RETRIES >= 0:
     try:
         bipartite_graph_svg = driver.find_element(
             by=By.CSS_SELECTOR,
-            value="container > svg"
+            value="div.container > svg"
         )
     except NoSuchElementException:
         pass
